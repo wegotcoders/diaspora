@@ -12,6 +12,17 @@ Rails.application.config.secret_token = '***********...'
 Diaspora::Application.config.secret_key_base = '*************...'
 ```
 
+## Ensure account deletions are run
+
+A regression caused accounts deletions to not properly perform in some cases, see [#4792](https://github.com/diaspora/diaspora/issues/4792).
+To ensure these are reexecuted properly, please run `RAILS_ENV=production bundle exec rake accounts:run_deletions`
+after you've upgraded.
+
+## Change in guid generation
+
+This version will break federation to pods running on versions prior 0.1.1.0.
+
+Read more in [#4249](https://github.com/diaspora/diaspora/pull/4249) and [#4883](https://github.com/diaspora/diaspora/pull/4883)
 
 ## Refactor
 * Drop number of followers from tags page [#4717](https://github.com/diaspora/diaspora/issues/4717)
@@ -28,8 +39,16 @@ Diaspora::Application.config.secret_key_base = '*************...'
 * Port publisher and bookmarklet to Bootstrap [#4678](https://github.com/diaspora/diaspora/pull/4678)
 * Improve search page, add better indications [#4794](https://github.com/diaspora/diaspora/pull/4794)
 * Port notifications and hovercards to Bootstrap [#4814](https://github.com/diaspora/diaspora/pull/4814)
+* Replace .rvmrc by .ruby-version and .ruby-gemset [#4854](https://github.com/diaspora/diaspora/pull/4855)
+* Reorder and reword items on user settings page [#4912](https://github.com/diaspora/diaspora/pull/4912)
+* SPV: Improve padding and interaction counts [#4426](https://github.com/diaspora/diaspora/pull/4426)
+* Remove auto 'mark as read' for notifications [#4810](https://github.com/diaspora/diaspora/pull/4810)
+* Improve set read/unread in notifications dropdown [#4869](https://github.com/diaspora/diaspora/pull/4869) 
+* Refactor publisher: trigger events for certain actions, introduce 'disabled' state [#4932](https://github.com/diaspora/diaspora/pull/4932)
 
 ## Bug fixes
+* Fix user account deletion [#4792](https://github.com/diaspora/diaspora/issues/4792)
+* Fix email body language when invite a friend [#4832](https://github.com/diaspora/diaspora/issues/4832)
 * Improve time agos by updating the plugin [#4280](https://github.com/diaspora/diaspora/issues/4280)
 * Do not add a space after adding a mention [#4767](https://github.com/diaspora/diaspora/issues/4767)
 * Fix active user statistics by saving a last seen timestamp for users [#4734](https://github.com/diaspora/diaspora/issues/4734)
@@ -41,14 +60,23 @@ Diaspora::Application.config.secret_key_base = '*************...'
 * Fix hovercards in the notificaitons dropdown [#4693](https://github.com/diaspora/diaspora/issues/4693)
 * Do not parse hashtags inside Markdown links [#3692](https://github.com/diaspora/diaspora/issues/3692)
 * Restore comment textarea content after revealing more comments [#4514](https://github.com/diaspora/diaspora/issues/4514)
+* OpenGraph: don't make description into links [#4492](https://github.com/diaspora/diaspora/issues/4492)
+* Don't cut off long tags in stream posts [#4864](https://github.com/diaspora/diaspora/issues/4864)
+* Do not replace earlier appearances of the name while mentioning somebody [#4868](https://github.com/diaspora/diaspora/issues/4868)
+* Catch exceptions when trying to decode an invalid URI [#4874](https://github.com/diaspora/diaspora/issues/4874)
+* Redirect to the stream when switching the mobile publisher to desktop [#4806](https://github.com/diaspora/diaspora/issues/4806)
+* Parsing mention witch contain in username special characters [#4919](https://github.com/diaspora/diaspora/pull/4919)
+* Do not show your own hovercard [#4724](https://github.com/diaspora/diaspora/issues/4724)
+* Hit Nominatim via https [#4967](https://github.com/diaspora/diaspora/issues/4967)
 
 ## Features
-* You can report a single post by clicking the correct icon in the controler section [#4517](https://github.com/diaspora/diaspora/pull/4517)
+* You can report a single post or comment by clicking the correct icon in the controler section [#4517](https://github.com/diaspora/diaspora/pull/4517) [#4781](https://github.com/diaspora/diaspora/pull/4781)
 * Add permalinks for comments [#4577](https://github.com/diaspora/diaspora/pull/4577)
 * New menu for the mobile version [#4673](https://github.com/diaspora/diaspora/pull/4673)
 * Added comment count to statistic to enable calculations of posts/comments ratios [#4799](https://github.com/diaspora/diaspora/pull/4799)
 * Add filters to notifications controller [#4814](https://github.com/diaspora/diaspora/pull/4814)
 * Activate hovercards in SPV and conversations [#4870](https://github.com/diaspora/diaspora/pull/4870)
+* Added possibility to conduct polls [#4861](https://github.com/diaspora/diaspora/pull/4861) [#4894](https://github.com/diaspora/diaspora/pull/4894) [#4897](https://github.com/diaspora/diaspora/pull/4897) [#4899](https://github.com/diaspora/diaspora/pull/4899)
 
 # 0.3.0.3
 
@@ -67,6 +95,7 @@ Diaspora::Application.config.secret_key_base = '*************...'
 ## Bug fixes
 * Fix regression caused by using after_commit with nested '#save' which lead to an infinite recursion [#4715](https://github.com/diaspora/diaspora/issues/4715)
 * Save textarea value before rendering comments when clicked 'show more...' [#4514](https://github.com/diaspora/diaspora/issues/4514)
+
 # 0.3.0.0
 
 ## Pod statistics
@@ -369,7 +398,6 @@ Updated:
 * warden 1.2.1 -> 1.2.3
 * webmock 1.11.0 -> 1.13.0
 * xpath 0.1.4 -> 2.0.0
-
 
 # 0.1.1.0
 

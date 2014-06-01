@@ -132,6 +132,13 @@ class Profile < ActiveRecord::Base
     birthday.to_s(:long).gsub(', 1000', '') if birthday.present?
   end
 
+  def bio_message
+    @bio_message ||= Diaspora::MessageRenderer.new(bio)
+  end
+
+  def location_message
+    @location_message ||= Diaspora::MessageRenderer.new(location)
+  end
 
   def tag_string
     if @tag_string

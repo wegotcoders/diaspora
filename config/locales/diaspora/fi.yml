@@ -24,6 +24,14 @@ fi:
           attributes:
             diaspora_handle:
               taken: "on jo varattu."
+        poll:
+          attributes:
+            poll_answers:
+              not_enough_poll_answers: "Ei riittävästi vastausvaihtoehtoja"
+        poll_participation:
+          attributes:
+            poll:
+              already_participated: "Olet jo osallistunut tähän kyselyyn."
         request:
           attributes:
             from_id:
@@ -46,7 +54,6 @@ fi:
       correlations: "Vastaavuudet"
       pages: "Sivut"
       pod_stats: "Podin tilastot"
-      post_report: "Ilmoitetut Julkaisut"
       sidekiq_monitor: "Sidekiq tarkkailija"
       user_search: "Käyttäjähaku"
       weekly_user_stats: "Viikottaiset käyttäjätilastot"
@@ -153,10 +160,6 @@ fi:
       aspect_not_empty: "Näkymä ei ole tyhjä"
       remove: "poista"
     index:
-      cubbies:
-        explanation: "Cubbi.es on ensimmäinen kehitettävä Diaspora-sovellus."
-        heading: "Yhdistä Cubbi.es:iin"
-        learn_more: "Lue lisää"
       diaspora_id:
         content_1: "Diaspora-ID:si on:"
         content_2: "Anna se kenelle tahansa ja hän löytää sinut Diasporasta."
@@ -230,14 +233,6 @@ fi:
       failure: "Antamasi näkymän nimi, %{name}, oli liian pitkä tallennettavaksi."
       success: "Näkymäsi, %{name}, muokkaus onnistui."
     zero: "ei näkymiä"
-  authorizations:
-    index:
-      no_applications: "Et ole rekisteröinyt vielä yhtäkään sovellusta."
-      revoke_access: "Estä pääsy"
-    new:
-      authorize: "Valtuuta"
-      cubbies_will: "Cubbies pystyy julkaisemaan kuvia puolestasi"
-      nope: "Ei"
   back: "Takaisin"
   blocks:
     create:
@@ -310,10 +305,10 @@ fi:
         two: "%{count} uutta viestiä"
         zero: "Ei uusia viestejä"
     index:
-      create_a_new_message: "luo uusi viesti"
+      conversations_inbox: "Keskustelut - Saapuneet"
+      create_a_new_conversation: "aloita uusi keskustelu"
       inbox: "Uudet viestit"
-      message_inbox: "Postilaatikko"
-      new_message: "Uusi viesti"
+      new_conversation: "Uusi keskustelu"
       no_conversation_selected: "ei valittua keskustelua"
       no_messages: "ei viestejä"
     new:
@@ -322,8 +317,8 @@ fi:
       sending: "Lähetetään..."
       subject: "aihe"
       to: "vast.ott."
-    new_message:
-      fail: "Virheellinen viesti"
+    new_conversation:
+      fail: "virheellinen viesti"
     show:
       delete: "poista ja estä tämä keskustelu"
       reply: "vastaa"
@@ -629,6 +624,8 @@ fi:
         two: "%{count} uutta ilmoitusta"
         zero: "Ei uusia ilmoituksia"
     index:
+      all_notifications: "Kaikki ilmoitukset"
+      also_commented: "Myös kommentoidut"
       and: "ja"
       and_others:
         few: "ja %{count} muuta"
@@ -637,13 +634,21 @@ fi:
         other: "ja %{count} muuta"
         two: "ja %{count} muuta"
         zero: "eikä kukaan muu"
+      comment_on_post: "Kommentoi julkaisua"
+      liked: "Tykätyt"
       mark_all_as_read: "Merkitse kaikki luetuiksi"
+      mark_read: "Merkitse luetuksi"
       mark_unread: "Merkitse lukemattomaksi"
+      mentioned: "Mainittu"
       notifications: "Ilmoitukset"
+      reshared: "Jaettu uudelleen"
+      show_all: "näytä kaikki"
+      show_unread: "näytä lukemattomat"
+      started_sharing: "Aloitti jakamaan"
     liked:
-      one: "%{actors} tykkäsi %{post_link}stäsi."
-      other: "%{actors} on tykännyt %{post_link}stäsi."
-      zero: "%{actors} tykkäsi %{post_link}stäsi."
+      one: "%{actors} tykkäsi julkaisustasi %{post_link}."
+      other: "%{actors} on tykännyt julkaisustasi %{post_link}."
+      zero: "%{actors} tykkäsi julkaisustasi %{post_link}."
     liked_post_deleted:
       one: "%{actors} tykkäsi poistamastasi julkaisusta."
       other: "%{actors} on tykännyt poistamastasi julkaisusta."
@@ -665,9 +670,9 @@ fi:
       other: "%{actors} lähettivät sinulle viestin."
       zero: "%{actors} lähetti sinulle viestin."
     reshared:
-      one: "%{actors} on jakanut %{post_link}si uudelleen."
-      other: "%{actors} on jakanut %{post_link}si uudelleen."
-      zero: "%{actors} on jakanut %{post_link}si uudelleen."
+      one: "%{actors} on jakanut julkaisusi %{post_link} uudelleen."
+      other: "%{actors} on jakanut julkaisusi %{post_link} uudelleen."
+      zero: "%{actors} on jakanut julkaisusi %{post_link} uudelleen."
     reshared_post_deleted:
       one: "%{actors} jakoi poistamasi julkaisun uudelleen."
       other: "%{actors} jakoivat poistamasi julkaisun uudelleen."
@@ -713,9 +718,6 @@ fi:
     mentioned:
       mentioned: "mainitsi sinut viestissään:"
       subject: "%{name} on maininnut sinut Diaspora*:ssa"
-    post_report_email:
-      body: "Ole hyvä ja arvioi niin pian kuin mahdollista!"
-      subject: "Uusi julkaisu merkittiin loukkaavaksi"
     private_message:
       reply_to_or_view: "Lue tai osallistu keskusteluun >"
     reshared:
@@ -746,15 +748,16 @@ fi:
     helper:
       is_not_sharing: "%{name} ei jaa kanssasi"
       is_sharing: "%{name} jakaa kanssasi"
-      people_on_pod_are_aware_of: " ihmiset podissa tietävät, että"
       results_for: " tulokset kyselylle %{params}"
     index:
-      couldnt_find_them_send_invite: "Etkö löytänyt etsimääsi henkilöä? Lähetä kutsu!"
+      couldnt_find_them: "Heitä ei löytynyt?"
       looking_for: "Etsitkö tägillä %{tag_link} merkittyjä viestejä?"
       no_one_found: "...ketään ei löytynyt."
       no_results: "Hei! Sinun tulisi etsiä jotakin."
-      results_for: "hakutulokset kohteelle"
+      results_for: "Käyttäjät jotka vastaavat hakua %{search_term}"
+      search_handle: "Käytä heidän diaspora* ID:tään (käyttäjänimi@pod.tld) löytääksesi ystäväsi varmasti."
       searching: "etsitään, pieni hetki..."
+      send_invite: "Ei edelleenkään mitään? Lähetä kutsu!"
     many: "%{count} henkilöä"
     one: "1 henkilö"
     other: "%{count} henkilöä"
@@ -830,18 +833,6 @@ fi:
     update:
       error: "Kuvan muokkaus epäonnistui."
       notice: "Kuva päivitettiin onnistuneesti."
-  post_report:
-    delete_link: "Poista julkaisu"
-    post_label: "<b>Julkaisu</b>: %{title}"
-    reason_label: "Syy %{text}"
-    reported_label: "<b>Ilmoituksen teki</b> %{person}"
-    review_link: "Merkitse tarkistetuksi"
-    status:
-      created: "Ilmoitus on luotu"
-      destroyed: "Julkaisu tuhottiin"
-      failed: "Jotain meni pieleen"
-      marked: "Ilmoitus merkittiin tarkistetuksi"
-    title: "Merkittyjen Ilmoitusten Yleiskatsaus"
   posts:
     presenter:
       title: "Julkaisu käyttäjältä %{name}"
@@ -988,7 +979,7 @@ fi:
   shared:
     add_contact:
       add_new_contact: "Lisää uusi kontakti"
-      create_request: "Etsi Diaspora-tunnuksella"
+      create_request: "Etsi Diaspora-ID:llä"
       diaspora_handle: "diaspora@pod.org"
       enter_a_diaspora_username: "Anna Diaspora-käyttäjätunnus:"
       know_email: "Tiedätkö heidän sähköpostiosoitteitansa? Kutsu heidät!"
@@ -1038,10 +1029,17 @@ fi:
         i_like: "Kiinnostukseni kohteita ovat %{tags}."
         invited_by: "Kiitos kutsusta, "
         newhere: "UusiTäällä"
+      poll:
+        add_a_poll: "Lisää kysely"
+        add_poll_answer: "Lisää vastaus"
+        option: "Vaihtoehto 1"
+        question: "Kysymys"
+        remove_poll_answer: "Poista vastaus"
       post_a_message_to: "Lähetä julkaisu näkymään %{aspect}"
       posting: "Lähetetään..."
       preview: "Esikatselu"
       publishing_to: "Julkaistaan: "
+      remove_location: "Poista sijainti"
       share: "Jaa"
       share_with: "Jaa"
       upload_photos: "Lisää kuvia"
@@ -1147,18 +1145,6 @@ fi:
       posts_tagged_with: "Tagilla #%{tag} merkityt julkaisut"
       stop_following: "Lopeta tagin #%{tag} seuraaminen"
   terms_and_conditions: "Käyttöehdot"
-  tokens:
-    show:
-      connect_to_cubbies: "Yhdistä kohteeseen Cubbi.es"
-      connecting_is_simple: "Diaspora-tilisi yhdistäminen on helppoa! Syötä vain Diaspora-tunnuksesi (<b>%{diaspora_id}</b>) Cubbi.es-<a href='%{href_link}'>asetussivulle</a> ja yhdistä."
-      daniels_account: "Danielin Diaspora-käyttäjätili"
-      love_to_try: "Kokeile sinäkin."
-      making_the_connection: "Yhteyden muodostaminen"
-      screenshot_explanation: "%{link1}. Tämä tila on linkitetty tänne: %{link2}."
-      sign_up_today: "Liity tänään!"
-      typical_userpage: "Esimerkki cubbi.es-käyttäjäsivusta"
-      via: "(%{link} kautta)"
-      what_is_cubbies: "Cubbi.es on maailman ensimmäinen Diaspora-sovellus. Se on myös paras tapa kerätä valokuvia verkossa."
   undo: "Peruuta?"
   username: "Käyttäjätunnus"
   users:
@@ -1170,9 +1156,9 @@ fi:
       success: "Tilisi on lukittu. Meiltä voi mennä 20 minuuttia tilisi sulkemiseen. Kiitos, kun kokeilit Diasporaa."
       wrong_password: "Syötetty salasana ei vastannut nykyistä salasanaasi."
     edit:
-      also_commented: "...joku myös kommentoi kontaktisi julkaisua?"
+      also_commented: "...joku kommentoi julkaisua jota olet myös itse kommentoinut"
       auto_follow_aspect: "Näkymä automaattisesti seurattaville käyttäjille:"
-      auto_follow_back: "Seuraa automaattisesti henkilöitä, jotka seuraavat sinua"
+      auto_follow_back: "Ryhdy jakamaan automaattisesti niiden henkilöiden kanssa, jotka alkavat jakamaan sinun kanssasi"
       change: "Vaihda"
       change_email: "Vaihda sähköpostiosoite"
       change_language: "Vaihda kieli"
@@ -1188,7 +1174,7 @@ fi:
         no_turning_back: "Tällä hetkellä tästä ei ole paluuta."
         what_we_delete: "Poistamme kaikki julkaisusi ja profiilisi tiedot niin pian kuin se on inhimillisesti mahdollista. Kommenttisi jäävät paikoilleen, mutta ne yhdistetään Diaspora-tunnukseesi nimesi sijasta."
       close_account_text: "Sulje käyttäjätili"
-      comment_on_post: "...joku kommentoi julkaisuasi?"
+      comment_on_post: "...joku kommentoi julkaisuasi"
       current_password: "Nykyinen salasana"
       current_password_expl: "se, jolla kirjaudut sisään..."
       download_photos: "Lataa kaikki kuvat"
@@ -1196,18 +1182,18 @@ fi:
       edit_account: "Muokkaa käyttäjätiliä"
       email_awaiting_confirmation: "Olemme lähettäneet sinulle aktivointilinkin osoitteeseen %{unconfirmed_email}. Jatkamme alkuperäisen osoitteesi %{email} käyttämistä siihen saakka, kunnes aktivoit uuden osoitteesi kyseisen linkin kautta."
       export_data: "Vie tietoja"
-      following: "Seuraamisasetukset"
+      following: "Jakamisen asetukset"
       getting_started: "Uudet käyttäjäasetukset"
-      liked: "...tykkää julkaisustasi?"
-      mentioned: "...sinut mainitaan julkaisuasi?"
+      liked: "joku tykkää julkaisustasi"
+      mentioned: "...sinut mainitaan julkaisussa"
       new_password: "Uusi salasana"
       photo_export_unavailable: "Kuvien vienti ei tällä hetkellä mahdollista"
-      private_message: "...saat yksityisviestin?"
-      receive_email_notifications: "Vastaanota sähköposti-ilmoituksia, kun.."
-      reshared: "...joku jakaa julkaisusi uudelleen?"
-      show_community_spotlight: "Näytetäänkö Yhteisön valokeila virrassa?"
+      private_message: "...saat yksityisviestin"
+      receive_email_notifications: "Vastaanota sähköposti-ilmoituksia, kun:"
+      reshared: "...joku jakaa julkaisusi uudelleen"
+      show_community_spotlight: "Näytä Yhteisön Valokeila virrassa"
       show_getting_started: "Ota aloitusohjeet uudelleen käyttöön"
-      started_sharing: "...aloittaa jakamaan kanssasi?"
+      started_sharing: "...aloittaa jakamaan kanssasi"
       stream_preferences: "Virran asetukset"
       your_email: "Sähköpostiosoitteesi"
       your_handle: "Diaspora-tunnuksesi"

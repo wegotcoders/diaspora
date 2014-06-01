@@ -24,12 +24,10 @@
         });
       }
 
-      self.dropdown.click(function(evt) {
-        evt.stopPropagation();
-      });
-
       self.documentBody.click(function(evt) {
-        if(self.dropdownShowing()) {
+        var inDropdown = $(evt.target).parents().is(self.dropdown);
+
+        if(!inDropdown && self.dropdownShowing()) {
           self.badgeLink.click();
         }
       });
@@ -75,13 +73,6 @@
       });
       self.dropdownNotifications.find('.read').each(function(index) {
         Diaspora.page.header.notifications.setUpRead( $(this) );
-      });
-      self.dropdownNotifications.find('.unread').each(function(index) {
-        var myItem = $(this);
-        setTimeout(function(){
-          if ( self.dropdownNotifications.is(":visible") )
-            myItem.trigger('click');
-        }, 2000 );
       });
       self.ajaxLoader.hide();
     };

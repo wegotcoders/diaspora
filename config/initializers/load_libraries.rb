@@ -12,9 +12,6 @@ require 'typhoeus'
 # Presenters
 require 'post_presenter'
 
-# Helpers
-require 'markdownify_helper'
-
 # Our libs
 require 'collect_user_photos'
 require 'diaspora'
@@ -32,3 +29,4 @@ require 'statistics'
 require 'stream'
 require 'webfinger'
 require 'webfinger_profile'
+require 'account_deleter'

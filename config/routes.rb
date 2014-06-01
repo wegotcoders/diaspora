@@ -5,7 +5,7 @@
 require 'sidekiq/web'
 
 Diaspora::Application.routes.draw do
-  resources :post_report, :except => [:edit]
+  resources :report, :except => [:edit, :new]
 
   if Rails.env.production?
     mount RailsAdmin::Engine => '/admin_panel', :as => 'rails_admin'
@@ -31,10 +31,14 @@ Diaspora::Application.routes.draw do
       get :interactions
     end
 
+    resources :poll_participations, :only => [:create]
+
     resources :likes, :only => [:create, :destroy, :index ]
     resources :participations, :only => [:create, :destroy, :index]
     resources :comments, :only => [:new, :create, :destroy, :index]
   end
+
+
 
   get 'p/:id' => 'posts#show', :as => 'short_post'
   get 'posts/:id/iframe' => 'posts#iframe', :as => 'iframe'

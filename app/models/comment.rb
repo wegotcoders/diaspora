@@ -79,6 +79,10 @@ class Comment < ActiveRecord::Base
     self.post = parent
   end
 
+  def message
+    @message ||= Diaspora::MessageRenderer.new text
+  end
+
   def text= text
      self[:text] = text.to_s.strip #to_s if for nil, for whatever reason
   end

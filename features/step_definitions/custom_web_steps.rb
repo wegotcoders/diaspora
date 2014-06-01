@@ -64,33 +64,12 @@ And /^I expand the publisher$/ do
  click_publisher
 end
 
-When /^I press the aspect dropdown$/ do
-  find('.dropdown .button').click
-end
-
-And /^I toggle the aspect "([^"]*)"$/ do |aspect_name|
-  aspect = @me.aspects.where(:name => aspect_name).first
-  find(".dropdown li[data-aspect_id='#{aspect.id}']").click
-end
-
 Then /^the publisher should be expanded$/ do
   find("#publisher")["class"].should_not include("closed")
 end
 
 Then /^the text area wrapper mobile should be with attachments$/ do
   find("#publisher_textarea_wrapper")["class"].should include("with_attachments")
-end
-
-When /^I append "([^"]*)" to the publisher$/ do |stuff|
-  elem = find('#status_message_fake_text')
-  elem.native.send_keys(' ' + stuff)
-end
-
-When /^I append "([^"]*)" to the publisher mobile$/ do |stuff|
-  elem = find('#status_message_text')
-  elem.native.send_keys(' ' + stuff)
-
-  find('#status_message_text').value.should include(stuff)
 end
 
 And /^I want to mention (?:him|her) from the profile$/ do
@@ -241,6 +220,14 @@ Then /^I should see a flash message indicating success$/ do
   flash_message_success?.should be_true
 end
 
+Then /^I should see a flash message indicating failure$/ do
+  flash_message_failure?.should be_true
+end
+
+Then /^I should see a flash message with a warning$/ do
+  flash_message_alert?.should be_true
+end
+
 Then /^I should see a flash message containing "(.+)"$/ do |text|
   flash_message_containing? text
 end
@@ -280,4 +267,9 @@ end
 
 Then(/^I should have a validation error on "(.*?)"$/) do |field_list|
   check_fields_validation_error field_list
+end
+
+And /^I active the first hovercard after loading the notifications page$/ do
+  page.should have_css '.notifications .hovercardable'
+  first('.notifications .hovercardable').hover
 end

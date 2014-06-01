@@ -46,11 +46,11 @@ es-AR:
       admin: "Administrador"
       close: "Cerrar"
       contacts: "Contactos"
+      conversations: "Conversaciones"
       help: "Ayuda"
       home: "Inicio"
       log_out: "Salir"
       mark_all_as_read: "Marcar todo como leído"
-      messages: "Mensajes"
       notifications: "Notificaciones"
       profile: "Perfil"
       recent_notifications: "Notificaciones recientes"
@@ -65,6 +65,9 @@ es-AR:
     my_activity: "Mi actividad"
     my_aspects: "Mis aspectos"
     my_stream: "Entrada"
+    notifications:
+      mark_read: "Marcar como leído"
+      mark_unread: "Marcar como no leído"
     people:
       not_found: "...y no se encontró a nadie."
     photo_uploader:
@@ -74,19 +77,23 @@ es-AR:
       invalid_ext: "El archivo {file} tiene una extensión inválida. Solo las extensiones {extensions} están permitidas."
       looking_good: "¡Apa, te ves muy bien!"
       size_error: "El archivo {file} es demasiado grande, el tamaño máximo permitido es {sizeLimit}."
-    post_report: "Informar"
-    post_report_prompt: "Por favor introduce el motivo:"
-    post_report_prompt_default: "contenido ofensivo"
+    poll:
+      close_result: "Ocultar resultados"
+      count:
+        one: "<%=count%> voto hasta ahora"
+        other: "<%=count%> votos hasta ahora"
+      result: "Resultados"
+      show_result: "Mostrar resultados"
+      vote: "Votar"
     publisher:
-      at_least_one_aspect: "Tenés que publicarlo en, por lo menos, un aspecto"
-      limited: "Limitada - tu publicación sera vista solo por la gente con quien la compartes "
-      near_from: "Cerca de: <%= location %>"
-      public: "Publica - tu publicación sera visible para cualquiera y los buscadores podrán encontrarla"
+      add_option: "Añadir opción"
+      option: "Opción <%= nr %>"
+      question: "Pregunta"
     reshares:
       duplicate: "¿Te gustó eh? ¡Ya habías compartido esa publicación!"
       post: "¿Compartir la publicación de <%= name %>?"
       successful: "¡La publicación se compartió correctamente!"
-    search_for: "Buscar a {{name}}"
+    search_for: "Buscar a <%= name %>"
     show_more: "mostrar más"
     stream:
       comment: "Comentar"
@@ -123,6 +130,7 @@ es-AR:
         stop_following: "Dejar de seguir #<%= tag %>"
       unfollow: "Dejar de seguir"
       unlike: "No me gusta"
+      via: "via <%= provider %>"
     tags:
       wasnt_that_interesting: "Bueno, supongo que #<%= tagName %> no era tan interesante..."
     timeago:
@@ -139,11 +147,12 @@ es-AR:
       seconds: "menos de un minuto"
       suffixAgo: ""
       suffixFromNow: "desde ahora"
+      wordSeparator: " "
       year: "cerca de un año"
       years: "%d años"
     videos:
       unknown: "Tipo de video desconocido"
-      watch: "Ver este video en {{provider}}"
+      watch: "Ver este video en <%= provider %>"
     viewer:
       comment: "Comentar"
       follow_post: "Seguir esta publicación"

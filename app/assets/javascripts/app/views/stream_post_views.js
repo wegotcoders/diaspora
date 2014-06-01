@@ -9,6 +9,7 @@ app.views.StreamPost = app.views.Post.extend({
     ".post-content" : "postContentView",
     ".oembed" : "oEmbedView",
     ".opengraph" : "openGraphView",
+    ".poll" : "pollView",
     ".status-message-location" : "postLocationStreamView"
   },
 
@@ -19,7 +20,7 @@ app.views.StreamPost = app.views.Post.extend({
 
     "click .remove_post": "destroyModel",
     "click .hide_post": "hidePost",
-    "click .post_report": "postReport",
+    "click .post_report": "report",
     "click .block_user": "blockUser"
   },
 
@@ -31,6 +32,7 @@ app.views.StreamPost = app.views.Post.extend({
     this.commentStreamView = new app.views.CommentStream({model : this.model});
     this.oEmbedView = new app.views.OEmbed({model : this.model});
     this.openGraphView = new app.views.OpenGraph({model : this.model});
+    this.pollView = new app.views.Poll({model : this.model});
   },
 
 
@@ -104,21 +106,6 @@ app.views.StreamPost = app.views.Post.extend({
     })
 
     this.remove();
-  },
-
-  postReport : function(evt) {
-    if(evt) { evt.preventDefault(); }
-    var text = prompt(Diaspora.I18n.t('post_report_prompt'),
-		      Diaspora.I18n.t('post_report_prompt_default'));
-
-    var postReport = new app.models.PostReport();
-    postReport.fetch({
-      data: {
-        post_id: this.model.id,
-        text: text
-      },
-      type: 'POST'
-    });
   },
 
   focusCommentTextarea: function(evt){
