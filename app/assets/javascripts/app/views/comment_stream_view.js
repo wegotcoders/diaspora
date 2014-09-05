@@ -94,5 +94,11 @@ app.views.CommentStream = app.views.Base.extend({
         self.model.trigger("commentsExpanded", self)
       }
     });
+  },
+
+  preview : function() {
+    var converter = new Markdown.Converter();
+    var preview = converter.makeHtml(this.model.get("text"));
+    this.$el.find(".preview_text").html(preview);
   }
 });

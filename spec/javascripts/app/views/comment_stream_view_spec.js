@@ -131,4 +131,15 @@ describe("app.views.CommentStream", function(){
     });
   });
 
+  describe("preview", function(){
+    beforeEach(function(){
+      this.view.model.set("text", "# heading")
+      this.view.render().preview();
+    })
+
+    it("should display the comments in preview mode", function(){
+      expect(this.view.$el.find("h1").length).toBeTruthy();
+    });
+  });
+
 });
