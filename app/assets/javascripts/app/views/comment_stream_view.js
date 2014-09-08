@@ -8,7 +8,8 @@ app.views.CommentStream = app.views.Base.extend({
     "keydown .comment_box": "keyDownOnCommentBox",
     "submit form": "createComment",
     "focus .comment_box": "commentTextareaFocused",
-    "click .toggle_post_comments": "expandComments"
+    "click .toggle_post_comments": "expandComments",
+    "click .preview": "preview"
   },
 
   initialize: function(options) {
@@ -98,7 +99,8 @@ app.views.CommentStream = app.views.Base.extend({
 
   preview : function() {
     var converter = new Markdown.Converter();
-    var preview = converter.makeHtml(this.model.get("text"));
+    var comment_text = this.$el.find(".comment_box").val();
+    var preview = converter.makeHtml(comment_text);
     this.$el.find(".preview_text").html(preview);
   }
 });
