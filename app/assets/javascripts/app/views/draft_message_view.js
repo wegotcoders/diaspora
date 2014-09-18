@@ -9,7 +9,8 @@ app.views.DraftMessageView = app.views.Base.extend({
   },
 
   initialize: function(options) {
-    this.model = new app.models.MessageDraft({ id : 1 });
+    this.model = new app.models.MessageDraft({ id : "MessageDraft" });
+    this.listenTo(this.model, 'change', Backbone.LocalStorage.restartTimer);
   },
 
   render: function() {
