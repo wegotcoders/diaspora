@@ -9,8 +9,13 @@ app.views.DraftMessageView = app.views.Base.extend({
   },
 
   initialize: function(options) {
-    this.model = new app.models.MessageDraft({ id : "MessageDraft" });
-    this.listenTo(this.model, 'change', Backbone.LocalStorage.restartTimer);
+    //each time obj instantiated it is being overwritten
+    //need to figure out how to dynamically assing id
+    //need logic to check if draft already exists -> possibly refactor save
+    this.model = new app.models.MessageDraft({ id : 1 });
+    //is it possible to DRY up # of saves by watching for changes?
+    //this.listenTo(this, 'change', this.save);
+    this.model.save();
   },
 
   render: function() {
@@ -21,13 +26,16 @@ app.views.DraftMessageView = app.views.Base.extend({
 
   setTo: function(e) {
    this.model.set("to", e.currentTarget.value);
+   this.model.save();
   },
 
   setSubject: function(e) {
    this.model.set("subject", e.currentTarget.value);
+   this.model.save();
   },
 
   setText: function(e) {
    this.model.set("text", e.currentTarget.value);
+   this.model.save();
   }
 });
