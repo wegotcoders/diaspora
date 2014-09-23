@@ -1,6 +1,7 @@
 //= require_self
 //= require_tree ./helpers
 //= require localstorage
+//= require draftable
 
 //= require ./router
 //= require ./models
