@@ -8,7 +8,8 @@ app.views.Conversations = Backbone.View.extend({
   },
 
   initialize: function() {
-
+    // initialize draftable events for message
+    //
     var draftMessageView = new app.views.DraftMessageView();
     draftMessageView.render();
 
