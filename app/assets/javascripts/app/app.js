@@ -1,6 +1,6 @@
 //= require_self
 //= require_tree ./helpers
-//= require localstorage
+//= require backbone.localStorage
 //= require draftable
 
 //= require ./router
